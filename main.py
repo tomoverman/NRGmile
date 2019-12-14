@@ -19,6 +19,7 @@ def integrate_simp(dist, alt, z):
     nodes=int(math.ceil(n*5/2)*2)
     x=np.linspace(0,dist[n-1],nodes)
     val=0
+    val_alt=0
     a=4.2351
     h=(x[nodes-1]-x[0])/(nodes)
     for i in range(1,(nodes)/2):
@@ -26,7 +27,17 @@ def integrate_simp(dist, alt, z):
         ddist1 = eval_interp_deriv(x[2*i-1],z,dist,alt)
         ddist2 = eval_interp_deriv(x[2*i],z,dist,alt)
         val += (h/3) * (np.exp(a*ddist/5280) + 4*np.exp(a*ddist1/5280) + np.exp(a*ddist2/5280))
+        val_alt += (h / 3) * alt_effect(alt[2*i-1]) * (np.exp(a * ddist / 5280) + 4 * np.exp(a * ddist1 / 5280) + np.exp(a * ddist2 / 5280))
+    return dict(norm = val, alt = val_alt)
+
+
+def alt_effect(alt):
+    if alt <= 6562:
+        val = 1
+    else:
+        val = 3.049*(10**-5) * alt + 1
     return val
+
 
 def segment_solver(dist, alt, z, nrg, num_days):
     day = nrg/num_days

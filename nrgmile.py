@@ -31,8 +31,12 @@ print("Total Elevation Loss: " + str(loss) + " feet")
 z=interp(dist,alt)
 
 # find and print the energy miles using composite simpson's rule. Check the main.py file for these functions.
-energy_miles = integrate_simp(dist,alt,z)
+energy_miles = integrate_simp(dist,alt,z).norm
 print("NRGmile rating: " + str(energy_miles) + " energy miles")
+
+# find and print the energy miles with effect of altitude using composite simpson's rule. Check the main.py file for these functions.
+energy_miles_alt = integrate_simp(dist,alt,z).alt
+print("NRGmile rating (with altitude effect): " + str(energy_miles_alt) + " energy miles")
 
 # below code finds the optimal segments for evenly distributing energy miles.
 num_days = 4
