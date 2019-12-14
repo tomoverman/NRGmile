@@ -5,7 +5,7 @@ import matplotlib.pyplot as pl
 
 # read in CSV of interest. Should have two columns, col one with the distance traveled (miles) and col two with the altitude (feet).
 # the CSV should also have a header row to work properly and not miss the first point.
-table = csv.reader(open('examples/rim_rock.csv'))
+table = csv.reader(open('examples/guad.csv'))
 # skip the header row
 next(table)
 dist = []
@@ -27,7 +27,8 @@ for i in range(0,len(alt)-1):
 print("Total Distance Traveled: " + str(max(dist)) + " miles")
 print("Total Elevation Gain: " + str(gain) + " feet")
 print("Total Elevation Loss: " + str(loss) + " feet")
-
+# pl.plot(dist,alt)
+# pl.show()
 # call our interpolation function to get our z values. This uses natural cubic spline interpolation.
 z=interp(dist,alt)
 
