@@ -26,8 +26,10 @@ def integrate_simp(dist, alt, z):
         ddist = eval_interp_deriv(x[2*i-2],z,dist,alt)
         ddist1 = eval_interp_deriv(x[2*i-1],z,dist,alt)
         ddist2 = eval_interp_deriv(x[2*i],z,dist,alt)
-        val += (h/3) * (np.exp(a*ddist/5280) + 4*np.exp(a*ddist1/5280) + np.exp(a*ddist2/5280))
-        val_alt += (h / 3) * alt_effect(alt[2*i-1]) * (np.exp(a * ddist / 5280) + 4 * np.exp(a * ddist1 / 5280) + np.exp(a * ddist2 / 5280))
+        altitude = eval_interp(x[2*i-1],z,dist,alt)
+        v= (h/3)*(np.exp(a*ddist/5280) + 4*np.exp(a*ddist1/5280) + np.exp(a*ddist2/5280))
+        val +=  v
+        val_alt +=  alt_effect(altitude) * v
     return dict(norm = val, alt = val_alt)
 
 
@@ -95,7 +97,7 @@ def eval_interp(x,z,dist,alt):
     return val
 
 
-# # find the value of the first derivative of the cubic spline interpolant at the given distance
+# find the value of the first derivative of the cubic spline interpolant at the given distance
 def eval_interp_deriv(x,z,dist,alt):
     n=len(dist)
     for i in reversed(range(0,n-1)):

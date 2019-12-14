@@ -1,10 +1,11 @@
 # Relevant imports. Main.py holds most of the important functions used here.
 from main import *
 import csv
+import matplotlib.pyplot as pl
 
 # read in CSV of interest. Should have two columns, col one with the distance traveled (miles) and col two with the altitude (feet).
 # the CSV should also have a header row to work properly and not miss the first point.
-table = csv.reader(open('examples/guad.csv'))
+table = csv.reader(open('examples/rim_rock.csv'))
 # skip the header row
 next(table)
 dist = []
@@ -31,16 +32,17 @@ print("Total Elevation Loss: " + str(loss) + " feet")
 z=interp(dist,alt)
 
 # find and print the energy miles using composite simpson's rule. Check the main.py file for these functions.
-energy_miles = integrate_simp(dist,alt,z).norm
+e=integrate_simp(dist,alt,z)
+energy_miles = e['norm']
 print("NRGmile rating: " + str(energy_miles) + " energy miles")
 
 # find and print the energy miles with effect of altitude using composite simpson's rule. Check the main.py file for these functions.
-energy_miles_alt = integrate_simp(dist,alt,z).alt
+energy_miles_alt = e['alt']
 print("NRGmile rating (with altitude effect): " + str(energy_miles_alt) + " energy miles")
 
-# below code finds the optimal segments for evenly distributing energy miles.
-num_days = 4
-segments = segment_solver(dist, alt, z, energy_miles, num_days)
-print("In order to evenly distribute your energy miles you should hit the follow mileage at the end of each day: \n")
-for i in range(0,num_days):
-    print("Day " + str(i+1) + ": " + "Mile " + str(segments[i]) + "\n")
+# # below code finds the optimal segments for evenly distributing energy miles.
+# num_days = 4
+# segments = segment_solver(dist, alt, z, energy_miles, num_days)
+# print("In order to evenly distribute your energy miles you should hit the follow mileage at the end of each day: \n")
+# for i in range(0,num_days):
+#     print("Day " + str(i+1) + ": " + "Mile " + str(segments[i]) + "\n")
