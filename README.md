@@ -9,8 +9,22 @@ However, this measure did not take into account many important factors that affe
 **The focus of this project is building a more accurate model for determining route difficulty rating.** By combining exercise science studies with numerical methods, we hope to achieve the first step in developing a robust difficulty measurement system.
 
 ## Potential Uses
+Some potential uses for this system include:
+- Planning long backpacking routes that require a relatively even distribution of energy miles each day
+- Finding the fastest marathons that yield the fastest times (think Boston Marathon qualifying)
+- Determining if a hike is suitable for your fitness level
+- Determining proper training routes
+- And many more...
 
 ## How to Use
+1. Download or clone this repository. Make sure you have Python 3 installed on your system.
+2. Add your route CSV file to the main directory.
+  - It is important that the CSV file is in the proper format. 
+    1. There must be two columns in the CSV.
+    2. The first column heading should read "distance (mi)" and the second column heading should read "altitude (ft)". The column entries should be in the corresponding measurement unit.
+    3. There can be no duplicate values in the distance (mi) column.
+3. The main file you will be running is "nrgmile.py" within the main directory. Edit the file to read in your specific CSV file and change any parameters you see fit.
+4. If you wish to fine-tune the inner workings of the algorithm, most of the numerical techniques are programmed in the "main.py" file within the main directory.
 
 ## Theoretical Foundation
 
