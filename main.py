@@ -28,6 +28,25 @@ def integrate_simp(dist, alt, z):
         val += (h/3) * (np.exp(a*ddist/5280) + 4*np.exp(a*ddist1/5280) + np.exp(a*ddist2/5280))
     return val
 
+def segment_solver(dist, alt, z, nrg, num_days):
+    day = nrg/num_days
+    n = len(dist)
+    nodes = int(math.ceil(n * 5 / 2) * 2)
+    x = np.linspace(0, dist[n - 1], nodes)
+    val = 0
+    a = 4.2351
+    h = (x[nodes - 1] - x[0]) / (nodes)
+    count=1
+    s=np.zeros(num_days)
+    for i in range(1, (nodes) / 2):
+        ddist = eval_interp_deriv(x[2 * i - 2], z, dist, alt)
+        ddist1 = eval_interp_deriv(x[2 * i - 1], z, dist, alt)
+        ddist2 = eval_interp_deriv(x[2 * i], z, dist, alt)
+        val += (h / 3) * (np.exp(a * ddist / 5280) + 4 * np.exp(a * ddist1 / 5280) + np.exp(a * ddist2 / 5280))
+        if val >= day*count:
+            s[count-1]=x[2*i]
+            count += 1
+    return s
 
 # find z values of natural cubic spline used to characterize the cubic spline interpolant
 def interp(dist, alt):

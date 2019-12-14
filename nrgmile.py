@@ -1,4 +1,4 @@
-# Relevant imports
+# Relevant imports. Main.py holds most of the important functions used here.
 from main import *
 import csv
 
@@ -13,7 +13,30 @@ alt=[]
 for row in table:
     dist.append(float(row[0]))
     alt.append(float(row[1]))
+
+#find total elevation gain and total elevation loss
+gain = 0
+loss = 0
+for i in range(0,len(alt)-1):
+    diff = alt[i+1] - alt[i]
+    if diff > 0:
+        gain += diff
+    else:
+        loss += abs(diff)
+print("Total Distance Traveled: " + str(max(dist)) + " miles")
+print("Total Elevation Gain: " + str(gain) + " feet")
+print("Total Elevation Loss: " + str(loss) + " feet")
+
 # call our interpolation function to get our z values. This uses natural cubic spline interpolation.
 z=interp(dist,alt)
+
+# find and print the energy miles using composite simpson's rule. Check the main.py file for these functions.
 energy_miles = integrate_simp(dist,alt,z)
-print(energy_miles)
+print("NRGmile rating: " + str(energy_miles) + " energy miles")
+
+# below code finds the optimal segments for evenly distributing energy miles.
+num_days = 4
+segments = segment_solver(dist, alt, z, energy_miles, num_days)
+print("In order to evenly distribute your energy miles you should hit the follow mileage at the end of each day: \n")
+for i in range(0,num_days):
+    print("Day " + str(i+1) + ": " + "Mile " + str(segments[i]) + "\n")
