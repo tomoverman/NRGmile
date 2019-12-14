@@ -17,3 +17,4 @@ However, this measure did not take into account many important factors that affe
 ## Future Improvements
 
 ## Questions or Advice
+Please email tom.overman@mavs.uta.edu for suggestions and/or questions. 
