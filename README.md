@@ -33,4 +33,4 @@ Find more detailed information and mathematical foundation for this algorithm at
 We are looking to collaborate with like-minded adventurers who have background in applied mathematics, exercise science, or software development. We are looking to conduct our own tailored exercise experiments on the effects of various factors on human performance; we need help from exercise scientists or biologists in making this happen in as unbiased of a manner as possible.
 
 ## Questions or Advice
-Please email tom.overman@mavs.uta.edu for suggestions and/or questions. 
+Please email tomoverman2025@u.northwestern.edu for suggestions and/or questions. 
